@@ -7,6 +7,7 @@ import Devices from '@/views/devices/Devices';
 import Auth from '@/views/auth/Auth';
 import LoginForm from '@/components/login_form/LoginForm';
 import SignupForm from '@/components/signup_form/SignupForm';
+import Navbar from '@/components/navbar/Navbar';
 
 Vue.use(Router);
 
@@ -17,17 +18,26 @@ export default new Router({
     {
       path: '/',
       name: Routes.HOME,
-      component: Home,
+      components: {
+        default: Home,
+        navbar: Navbar,
+      },
     },
     {
       path: '/users',
       name: Routes.USERS,
-      component: Users,
+      components: {
+        default: Users,
+        navbar: Navbar,
+      },
     },
     {
       path: '/devices',
       name: Routes.DEVICES,
-      component: Devices,
+      components: {
+        default: Devices,
+        navbar: Navbar,
+      },
     },
     {
       path: '/auth',
