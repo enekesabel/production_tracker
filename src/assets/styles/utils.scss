@@ -1,0 +1,17 @@
+@import './element_vars';
+
+// divider
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: $border-base;
+  display: block;
+}
+
+button {
+  outline: none !important;
+}
+
+.el-textarea textarea{
+  resize: none;
+}
