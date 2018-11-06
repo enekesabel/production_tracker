@@ -6,5 +6,7 @@
 
 <style lang="css">
     @import "~element-ui/lib/theme-chalk/index.css";
-    @import "~bootstrap/dist/css/bootstrap.min.css";
+</style>
+<style lang="scss">
+    @import "./assets/styles/index";
 </style>
