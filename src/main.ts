@@ -16,7 +16,6 @@ Vue.config.productionTip = false;
 Vue.use(Element, {locale});
 Vue.use(VueAxios, axios);
 
-console.log(process.env)
 Vue.router = router;
 Vue.axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 Vue.prototype.baseUrl = Vue.axios.defaults.baseURL;
