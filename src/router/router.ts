@@ -22,6 +22,9 @@ export default new Router({
         default: Home,
         navbar: Navbar,
       },
+      meta: {
+        auth: true,
+      },
     },
     {
       path: '/users',
@@ -30,6 +33,9 @@ export default new Router({
         default: Users,
         navbar: Navbar,
       },
+      meta: {
+        auth: true,
+      },
     },
     {
       path: '/devices',
@@ -37,6 +43,9 @@ export default new Router({
       components: {
         default: Devices,
         navbar: Navbar,
+      },
+      meta: {
+        auth: true,
       },
     },
     {
