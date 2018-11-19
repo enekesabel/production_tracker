@@ -16,8 +16,9 @@ Vue.config.productionTip = false;
 Vue.use(Element, {locale});
 Vue.use(VueAxios, axios);
 
+console.log(process.env)
 Vue.router = router;
-Vue.axios.defaults.baseURL = process.env.API_URL;
+Vue.axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 Vue.prototype.baseUrl = Vue.axios.defaults.baseURL;
 
 Vue.use(VueAuth, {
@@ -35,9 +36,9 @@ Vue.use(VueAuth, {
   authRedirect: '/login',
   http: require('@websanova/vue-auth/drivers/http/axios.1.x.js'),
   router: require('@websanova/vue-auth/drivers/router/vue-router.2.x.js'),
-  loginData: {url: '/users/login', fetchUser: false},
+  loginData: {url: '/users/login', fetchUser: false, redirect: '/'},
   logoutData: {makeRequest: false},
-  registerData: {url: '/users/register', method: 'POST', redirect: '/'},
+  registerData: {url: '/users/register', method: 'POST', redirect: '/login'},
   refreshData: {enabled: false},
   fetchData: {
     enabled: false,
