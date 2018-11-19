@@ -55,7 +55,7 @@ export default new Router({
           component: LoginForm,
         },
         {
-          path: '/login',
+          path: '/signup',
           name: Routes.SIGNUP,
           component: SignupForm,
         },
