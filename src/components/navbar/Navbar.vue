@@ -14,7 +14,8 @@
         </el-menu-item>
         <el-submenu index="2" style="float: right;">
             <template slot="title">Profile</template>
-            <el-menu-item :route="{name: Routes.LOGIN}"
+            <el-menu-item @click="logout"
+                          :route="{name: Routes.LOGIN}"
                           :index="Routes.LOGIN">Log out
             </el-menu-item>
         </el-submenu>

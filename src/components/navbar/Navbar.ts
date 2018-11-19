@@ -6,4 +6,10 @@ export default class Navbar extends Vue {
 
   Routes = Routes;
 
+  logout() {
+    this.$auth.logout({
+      redirect: '/login',
+    });
+  }
+
 }
