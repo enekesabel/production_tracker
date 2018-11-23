@@ -4,11 +4,13 @@ import {IRootState} from '@/store/IRootState';
 import {Machine} from '@/types/Machine';
 import {RootMutation} from '@/store/RootMutation';
 import axios from 'axios';
+import {User} from "@/types/User";
 
 Vue.use(Vuex);
 
 const state: IRootState = {
   machines: [],
+  users: [],
 };
 
 const actions: ActionTree<IRootState, IRootState> = {
@@ -23,6 +25,10 @@ const actions: ActionTree<IRootState, IRootState> = {
   async deleteMachine({commit}, machineId: string) {
     const response = await axios.delete(`machines/${machineId}`);
     commit(RootMutation.REMOVE_MACHINE, machineId);
+  },
+  async fetchUsers({commit}) {
+    const response = await axios.get('users');
+    commit(RootMutation.SET_USERS, response.data);
   },
 };
 
@@ -40,6 +46,9 @@ const mutations: MutationTree<IRootState> = {
     if (index !== -1) {
       state.machines.splice(index, 1);
     }
+  },
+  [RootMutation.SET_USERS](state, users: User[]) {
+    state.users = users;
   },
 };
 
