@@ -1,4 +1,5 @@
 export type Machine = {
-  MachineName: string,
-  MachineId: string,
+  machineName: string,
+  machineId: string,
+  id: string,
 }

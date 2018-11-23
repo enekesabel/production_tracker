@@ -4,7 +4,7 @@ import {IRootState} from '@/store/IRootState';
 import {Machine} from '@/types/Machine';
 import {RootMutation} from '@/store/RootMutation';
 import axios from 'axios';
-import {User} from "@/types/User";
+import {User} from '@/types/User';
 
 Vue.use(Vuex);
 
@@ -20,11 +20,11 @@ const actions: ActionTree<IRootState, IRootState> = {
   },
   async createMachine({commit}, machine: Machine) {
     const response = await axios.post('machines', machine);
-    commit(RootMutation.ADD_MACHINE, machine);
+    commit(RootMutation.ADD_MACHINE, response.data);
   },
-  async deleteMachine({commit}, machineId: string) {
-    const response = await axios.delete(`machines/${machineId}`);
-    commit(RootMutation.REMOVE_MACHINE, machineId);
+  async deleteMachine({commit}, id: string) {
+    const response = await axios.delete(`machines/${id}`);
+    commit(RootMutation.REMOVE_MACHINE, id);
   },
   async fetchUsers({commit}) {
     const response = await axios.get('users');
@@ -37,12 +37,12 @@ const mutations: MutationTree<IRootState> = {
     state.machines = machines;
   },
   [RootMutation.ADD_MACHINE](state, machine: Machine) {
-    if (!state.machines.find(m => machine.MachineId === m.MachineId)) {
+    if (!state.machines.find(m => machine.id === m.id)) {
       state.machines.push(machine);
     }
   },
-  [RootMutation.REMOVE_MACHINE](state, machineId: string) {
-    const index = state.machines.findIndex(m => m.MachineId === machineId);
+  [RootMutation.REMOVE_MACHINE](state, id: string) {
+    const index = state.machines.findIndex(m => m.id === id);
     if (index !== -1) {
       state.machines.splice(index, 1);
     }

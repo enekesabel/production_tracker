@@ -15,14 +15,15 @@ export default class Devices extends Vue {
 
   private dialogVisible: boolean = false;
   private machineToAdd: Machine = {
-    MachineId: '',
-    MachineName: '',
+    id: '',
+    machineId: '',
+    machineName: '',
   };
   private rules = {
-    MachineId: [
+    id: [
       {required: true, message: 'Please add a name', trigger: 'blur'},
     ],
-    MachineName: [
+    machineName: [
       {required: true, message: 'Please add an id', trigger: 'blur'},
     ],
   };

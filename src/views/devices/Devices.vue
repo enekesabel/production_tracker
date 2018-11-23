@@ -1,25 +1,27 @@
 <template>
     <div>
-        <h1>
-            Devices
-        </h1>
+        <div class="d-flex flex-row justify-content-between">
+            <h1>
+                Devices
+            </h1>
+            <el-button type="primary"
+                       class="mt-3"
+                       @click="openDialog">Add device
+            </el-button>
+        </div>
         <el-table
                 :data="machines"
                 style="width: 100%">
             <el-table-column
-                    prop="MachineName"
+                    prop="machineName"
                     label="Machine">
             </el-table-column>
             <el-table-column
-                    prop="MachineId"
-                    label="Id">
+                    prop="machineId"
+                    label="machineId">
             </el-table-column>
             <div slot="empty" class="py-3">
                 <div>You have no connected devices yet.</div>
-                <el-button type="primary"
-                           class="mt-3"
-                           @click="openDialog">Add device
-                </el-button>
             </div>
         </el-table>
         <el-dialog
@@ -30,11 +32,11 @@
                      ref="addMachineForm"
                      :rules="rules"
                      label-width="60px">
-                <el-form-item label="Name" prop="MachineName">
-                    <el-input v-model="machineToAdd.MachineName"></el-input>
+                <el-form-item label="Name" prop="machineName">
+                    <el-input v-model="machineToAdd.machineName"></el-input>
                 </el-form-item>
-                <el-form-item label="Id" prop="MachineId">
-                    <el-input v-model="machineToAdd.MachineId"></el-input>
+                <el-form-item label="Id" prop="machineId">
+                    <el-input v-model="machineToAdd.machineId"></el-input>
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
