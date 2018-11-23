@@ -18,7 +18,22 @@
             </el-table-column>
             <el-table-column
                     prop="machineId"
-                    label="machineId">
+                    label="Id">
+            </el-table-column>
+            <el-table-column
+                    align="center"
+                    label="Operations"
+                    width="180">
+                <template slot-scope="scope">
+                    <div class="w-100 text-center">
+                        <el-button type="danger"
+                                   icon="el-icon-delete"
+                                   title="Detach"
+                                   size="mini"
+                                   @click="detachMachine(scope.row.id)"
+                                   circle></el-button>
+                    </div>
+                </template>
             </el-table-column>
             <div slot="empty" class="py-3">
                 <div>You have no connected devices yet.</div>

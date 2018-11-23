@@ -12,6 +12,8 @@ export default class Devices extends Vue {
   private fetchMachines: () => Promise<void>;
   @Action
   private createMachine: (machine: Machine) => Promise<void>;
+  @Action
+  private deleteMachine: (id: string) => Promise<void>;
 
   private dialogVisible: boolean = false;
   private machineToAdd: Machine = {
@@ -42,6 +44,30 @@ export default class Devices extends Vue {
       await this.createMachine(this.machineToAdd);
       this.closeDialog();
     } catch (e) {
+    }
+  }
+
+  private async detachMachine(id: string) {
+    console.log('detachMachine');
+    try {
+      await this.$confirm('This operation will detach the machine. Continue?',
+        'Warning',
+        {
+          confirmButtonText: 'OK',
+          cancelButtonText: 'Cancel',
+          type: 'warning',
+        });
+
+      await this.deleteMachine(id);
+      this.$message({
+        type: 'success',
+        message: 'Detaching completed',
+      });
+    } catch (e) {
+      this.$message({
+        type: 'info',
+        message: 'Detaching canceled',
+      });
     }
   }
 
