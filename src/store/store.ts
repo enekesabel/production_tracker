@@ -5,6 +5,7 @@ import {Machine} from '@/types/Machine';
 import {RootMutation} from '@/store/RootMutation';
 import axios from 'axios';
 import {User} from '@/types/User';
+import {MachineApi} from '@/api/MachineApi';
 
 Vue.use(Vuex);
 
@@ -15,15 +16,15 @@ const state: IRootState = {
 
 const actions: ActionTree<IRootState, IRootState> = {
   async fetchMachines({commit}) {
-    const response = await axios.get('machines');
-    commit(RootMutation.SET_MACHINES, response.data);
+    const machines = await MachineApi.getMachines();
+    commit(RootMutation.SET_MACHINES, machines);
   },
   async createMachine({commit}, machine: Machine) {
-    const response = await axios.post('machines', machine);
-    commit(RootMutation.ADD_MACHINE, response.data);
+    const createdMachine = await MachineApi.createMachine(machine);
+    commit(RootMutation.ADD_MACHINE, createdMachine);
   },
   async deleteMachine({commit}, id: string) {
-    const response = await axios.delete(`machines/${id}`);
+    await MachineApi.deleteMachine(id);
     commit(RootMutation.REMOVE_MACHINE, id);
   },
   async fetchUsers({commit}) {
