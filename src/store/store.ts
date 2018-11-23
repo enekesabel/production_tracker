@@ -3,9 +3,9 @@ import Vuex, {ActionTree, MutationTree} from 'vuex';
 import {IRootState} from '@/store/IRootState';
 import {Machine} from '@/types/Machine';
 import {RootMutation} from '@/store/RootMutation';
-import axios from 'axios';
 import {User} from '@/types/User';
 import {MachineApi} from '@/api/MachineApi';
+import {UserApi} from '@/api/UserApi';
 
 Vue.use(Vuex);
 
@@ -28,8 +28,8 @@ const actions: ActionTree<IRootState, IRootState> = {
     commit(RootMutation.REMOVE_MACHINE, id);
   },
   async fetchUsers({commit}) {
-    const response = await axios.get('users');
-    commit(RootMutation.SET_USERS, response.data);
+    const users = await UserApi.getUsers();
+    commit(RootMutation.SET_USERS, users);
   },
 };
 
