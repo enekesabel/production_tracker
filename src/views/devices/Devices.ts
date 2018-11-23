@@ -22,11 +22,11 @@ export default class Devices extends Vue {
     machineName: '',
   };
   private rules = {
-    id: [
-      {required: true, message: 'Please add a name', trigger: 'blur'},
+    machineId: [
+      {required: true, message: 'Please provide a name', trigger: 'blur'},
     ],
     machineName: [
-      {required: true, message: 'Please add an id', trigger: 'blur'},
+      {required: true, message: 'Please provide an id', trigger: 'blur'},
     ],
   };
 
@@ -48,7 +48,6 @@ export default class Devices extends Vue {
   }
 
   private async detachMachine(id: string) {
-    console.log('detachMachine');
     try {
       await this.$confirm('This operation will detach the machine. Continue?',
         'Warning',
