@@ -3,7 +3,7 @@ import App from './App.vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import router from './router/router';
-import store from './store';
+import store from './store/store';
 import Element from 'element-ui';
 
 const locale = require('element-ui/lib/locale/lang/en');

@@ -1,0 +1,5 @@
+export enum RootMutation {
+  SET_MACHINES = 'SET_MACHINES',
+  ADD_MACHINE = 'ADD_MACHINE',
+  REMOVE_MACHINE = 'REMOVE_MACHINE',
+}
