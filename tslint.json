@@ -31,6 +31,7 @@
       {
         "method-regex": "^[\\[a-zA-Z][\\.\\]\\w\\d]+$"
       }
-    ]
+    ],
+    "radix": false
   }
 }
