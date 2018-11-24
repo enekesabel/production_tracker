@@ -22,7 +22,7 @@ export class VisibilitySyncMixin extends Vue {
   @Watch('localVisible')
   onLocalVisibleChange(localVisible: boolean) {
     if (localVisible !== this.visible) {
-      this.$emit('update:visible', localVisible)
+      this.$emit('update:visible', localVisible);
     }
   }
 
