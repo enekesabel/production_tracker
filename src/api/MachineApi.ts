@@ -11,6 +11,10 @@ export const MachineApi = {
     const response = await axios.post('machines', machine);
     return response.data;
   },
+  async updateMachine(machine: Machine): Promise<Machine> {
+    const response = await axios.put('machines', machine);
+    return response.data;
+  },
   async deleteMachine(id: string) {
     return axios.delete(`machines/${id}`);
   },

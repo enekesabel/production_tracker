@@ -23,6 +23,10 @@ const actions: ActionTree<IRootState, IRootState> = {
     const createdMachine = await MachineApi.createMachine(machine);
     commit(RootMutation.ADD_MACHINE, createdMachine);
   },
+  async updateMachine({commit}, machine: Machine) {
+    const updatedMachine = await MachineApi.updateMachine(machine);
+    commit(RootMutation.SET_MACHINE, updatedMachine);
+  },
   async deleteMachine({commit}, id: string) {
     await MachineApi.deleteMachine(id);
     commit(RootMutation.REMOVE_MACHINE, id);
@@ -36,6 +40,13 @@ const actions: ActionTree<IRootState, IRootState> = {
 const mutations: MutationTree<IRootState> = {
   [RootMutation.SET_MACHINES](state, machines: Machine[]) {
     state.machines = machines;
+  },
+  [RootMutation.SET_MACHINE](state, machine: Machine) {
+    const index = state.machines.findIndex(m => m.id === machine.id);
+    if (index === -1) {
+      throw new Error(`Machine not found by id ${machine.id}`);
+    }
+    state.machines.splice(index, 1, machine);
   },
   [RootMutation.ADD_MACHINE](state, machine: Machine) {
     if (!state.machines.find(m => machine.id === m.id)) {
