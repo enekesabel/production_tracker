@@ -15,6 +15,9 @@ export const PermissionApi = {
     });
     return response.data;
   },
+  async grantSuperUserPermission(): Promise<void> {
+    await axios.post('permissions/grantsuperuser');
+  },
   async deletePermission(permissionId: string) {
     await axios.delete(`permissions/${permissionId}`);
   },
