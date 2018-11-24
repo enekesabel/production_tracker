@@ -7,7 +7,11 @@ export const MachineInputApi = {
     const response = await axios.get(`machinedata/${machineId}`);
     return response.data;
   },
-  async putMachineInput(machineInput: MachineInput): Promise<MachineInput> {
+  async createMachineInput(machineInput: MachineInput): Promise<MachineInput> {
+    const response = await axios.post('machinedata', machineInput);
+    return response.data;
+  },
+  async updateMachineInput(machineInput: MachineInput): Promise<MachineInput> {
     const response = await axios.put('machinedata', machineInput);
     return response.data;
   },
