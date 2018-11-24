@@ -1,4 +1,4 @@
-import {Component, Prop, Vue} from 'vue-property-decorator';
+import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
 import {MachineInput} from '@/types/MachineInput';
 import MachineInputEditorDialog from '@/components/machine_input_editor/MachineInputEditorDialog';
 import {GPIOPin} from '@/enums/GPIOPin';
@@ -21,7 +21,7 @@ export default class MachineInputTable extends Vue {
   private inputEditorMode: InputEditorMode = InputEditorMode.ADD;
 
   get usedPins(): GPIOPin[] {
-    return this.inputs.map(i => i.gPIOPin);
+    return this.inputs.map(i => i.gpioPin);
   }
 
   get inputDialogTitle(): string {
@@ -46,7 +46,7 @@ export default class MachineInputTable extends Vue {
   get modifiedInputs(): MachineInput[] {
     return this.inputs.filter((i) => {
       const oldVersion = this.oldInputs.find(o => o.id === i.id);
-      return i.id && (oldVersion.gPIOPin !== i.gPIOPin || oldVersion.name !== i.name);
+      return i.id && (oldVersion.gpioPin !== i.gpioPin || oldVersion.name !== i.name);
     });
   }
 
@@ -56,17 +56,25 @@ export default class MachineInputTable extends Vue {
     this.openMachineInputEditorDialog();
   }
 
-  async addInput() {
+  addInput() {
     const machineInputEditorDialog = this.$refs.machineInputEditorDialog as MachineInputEditorDialog;
     this.inputEditorMode = InputEditorMode.ADD;
     this.selectedInput = {
-      gPIOPin: null,
+      gpioPin: null,
       id: null,
       machineId: this.machineId,
       name: '',
     };
 
     this.openMachineInputEditorDialog();
+  }
+
+  removeInput(input: MachineInput) {
+    const index = this.inputs.indexOf(input);
+    if (index === -1) {
+      return;
+    }
+    this.inputs.splice(index, 1);
   }
 
   openMachineInputEditorDialog() {
@@ -86,17 +94,26 @@ export default class MachineInputTable extends Vue {
   }
 
   async save() {
+    await Promise.all(this.removedInputs.map((i) => {
+      return MachineInputApi.deleteMachineInput(i.id);
+    }));
+
     let promises: Promise<any>[] = this.addedInputs.map((i) => {
       return MachineInputApi.createMachineInput(i);
     });
     promises = [...promises, ...this.modifiedInputs.map((i) => {
       return MachineInputApi.updateMachineInput(i);
     })];
-    promises = [...promises, ...this.removedInputs.map((i) => {
-      return MachineInputApi.deleteMachineInput(i.id);
-    })];
 
     await Promise.all(promises);
+  }
+
+  @Watch('machineId', {immediate: true})
+  onMachinedChange(machineId: string) {
+    if (!machineId) {
+      return;
+    }
+    this.fetchInputs(machineId);
   }
 
 }

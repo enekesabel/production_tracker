@@ -32,7 +32,7 @@ export default class MachineInputEditorDialog extends mixins(DialogMixin) {
     name: [
       {required: true, message: 'Please provide a name', trigger: 'blur'},
     ],
-    gPIOPin: [
+    gpioPin: [
       {required: true, message: 'Please select a pin', trigger: 'change'},
     ],
   };

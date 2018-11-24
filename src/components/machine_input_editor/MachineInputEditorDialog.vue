@@ -10,8 +10,8 @@
             <el-form-item label="Name" prop="name">
                 <el-input v-model="localInput.name"></el-input>
             </el-form-item>
-            <el-form-item label="Pin" prop="gPIOPin">
-                <el-select v-model="localInput.gPIOPin" placeholder="Select">
+            <el-form-item label="Pin" prop="gpioPin">
+                <el-select v-model="localInput.gpioPin" placeholder="Select">
                     <el-option
                             v-for="pin in availablePins"
                             :key="pin"

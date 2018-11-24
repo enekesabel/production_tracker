@@ -2,10 +2,10 @@
     <div>
         <el-table
                 :data="inputs"
-                :default-sort="{prop: 'gPIOPin'}"
+                :default-sort="{prop: 'gpioPin'}"
                 style="width: 100%">
             <el-table-column
-                    prop="gPIOPin"
+                    prop="gpioPin"
                     label="Pin">
             </el-table-column>
             <el-table-column
@@ -27,6 +27,12 @@
                                    title="Configure"
                                    size="mini"
                                    @click="editInput(scope.row)"
+                                   circle></el-button>
+                        <el-button type="danger"
+                                   icon="el-icon-delete"
+                                   title="Remove"
+                                   size="mini"
+                                   @click="removeInput(scope.row)"
                                    circle></el-button>
                     </div>
                 </template>
