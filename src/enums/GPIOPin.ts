@@ -1,0 +1,18 @@
+export enum GPIOPin {
+  GPIOPin_0,
+  GPIOPin_1,
+  GPIOPin_2,
+  GPIOPin_3,
+  GPIOPin_4,
+  GPIOPin_5,
+  GPIOPin_6,
+  GPIOPin_7,
+  GPIOPin_8,
+  GPIOPin_9,
+  GPIOPin_10,
+  GPIOPin_11,
+  GPIOPin_12,
+  GPIOPin_13,
+  GPIOPin_14,
+  GPIOPin_15,
+}
