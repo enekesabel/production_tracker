@@ -40,7 +40,7 @@ export default class MachineSettingsForm extends Vue {
   @Watch('localMachine', {deep: true})
   onLocalMachineChange(localMachine: Machine) {
     if (localMachine !== this.machine) {
-      this.$emit('update:machine', localMachine)
+      this.$emit('update:machine', localMachine);
     }
   }
 
