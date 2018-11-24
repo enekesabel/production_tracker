@@ -38,7 +38,7 @@
                 </template>
             </el-table-column>
             <div slot="empty" class="py-3">
-                <div>This machine no configured inputs yet.</div>
+                <div>This machine has no configured inputs yet.</div>
             </div>
             <div slot="append"
                  class="w-100 text-center py-3">
