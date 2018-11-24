@@ -25,7 +25,13 @@
                     label="Operations"
                     width="180">
                 <template slot-scope="scope">
-                    <div class="w-100 text-center">
+                    <div>
+                        <el-button type="primary"
+                                   icon="el-icon-setting"
+                                   title="Configure"
+                                   size="mini"
+                                   @click="configureMachine(scope.row)"
+                                   circle></el-button>
                         <el-button type="danger"
                                    icon="el-icon-delete"
                                    title="Detach"
@@ -39,9 +45,11 @@
                 <div>You have no connected devices yet.</div>
             </div>
         </el-table>
+        <machine-settings-dialog :visible.sync="machineSettingsDialogVisible"
+                                 :machine="selectedMachine"></machine-settings-dialog>
         <el-dialog
                 title="Add device"
-                :visible.sync="dialogVisible"
+                :visible.sync="machineDeleteDialogVisible"
                 width="30%">
             <el-form :model="machineToAdd"
                      ref="addMachineForm"
@@ -55,7 +63,7 @@
                 </el-form-item>
             </el-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="closeDialog">Cancel</el-button>
+                <el-button @click="closeDeleteDialog">Cancel</el-button>
                 <el-button type="primary" @click="addMachine">Add</el-button>
             </div>
         </el-dialog>

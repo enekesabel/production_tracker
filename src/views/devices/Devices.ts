@@ -1,9 +1,12 @@
-import {Component, Vue} from 'vue-property-decorator';
+import {Component, Vue, Watch} from 'vue-property-decorator';
 import {Action, State} from 'vuex-class';
 import {Machine} from '@/types/Machine';
 import {ElForm} from 'element-ui/types/form';
+import MachineSettingsDialog from '@/components/machine_settings_dialog/MachineSettingsDialog';
 
-@Component
+@Component({
+  components: {MachineSettingsDialog},
+})
 export default class Devices extends Vue {
 
   @State
@@ -15,7 +18,9 @@ export default class Devices extends Vue {
   @Action
   private deleteMachine: (id: string) => Promise<void>;
 
-  private dialogVisible: boolean = false;
+  private machineDeleteDialogVisible: boolean = false;
+  private machineSettingsDialogVisible: boolean = false;
+  private selectedMachine: Machine = null;
   private machineToAdd: Machine = {
     id: '',
     machineId: '',
@@ -42,9 +47,14 @@ export default class Devices extends Vue {
     try {
       await this.validateForm();
       await this.createMachine(this.machineToAdd);
-      this.closeDialog();
+      this.closeDeleteDialog();
     } catch (e) {
     }
+  }
+
+  private configureMachine(machine: Machine) {
+    this.machineSettingsDialogVisible = true;
+    this.selectedMachine = machine;
   }
 
   private async detachMachine(id: string) {
@@ -70,11 +80,19 @@ export default class Devices extends Vue {
     }
   }
 
-  private openDialog() {
-    this.dialogVisible = true;
+  openDeleteDialog() {
+    this.machineDeleteDialogVisible = true;
   }
 
-  private closeDialog() {
-    this.dialogVisible = false;
+  closeDeleteDialog() {
+    this.machineDeleteDialogVisible = false;
   }
+
+  @Watch('machineSettingsDialogVisible')
+  onMachineSettingsDialogVisibilityChange(machineSettingsDialogVisible: boolean) {
+    if (!machineSettingsDialogVisible) {
+      this.selectedMachine = null;
+    }
+  }
+
 }
