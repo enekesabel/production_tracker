@@ -20,6 +20,10 @@ export default class MachineInputTable extends Vue {
   private selectedInput: MachineInput = null;
   private inputEditorMode: InputEditorMode = InputEditorMode.ADD;
 
+  get showAddButton(): boolean {
+    return this.inputs.length < 16;
+  }
+
   get usedPins(): GPIOPin[] {
     return this.inputs.map(i => i.gpioPin);
   }

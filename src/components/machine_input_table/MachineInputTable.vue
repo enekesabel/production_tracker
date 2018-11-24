@@ -43,6 +43,7 @@
             <div slot="append"
                  class="w-100 text-center py-3">
                 <el-button type="primary"
+                           v-if="showAddButton"
                            icon="el-icon-plus"
                            title="Add input"
                            @click="addInput"
