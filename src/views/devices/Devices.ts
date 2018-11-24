@@ -1,11 +1,11 @@
 import {Component, Vue, Watch} from 'vue-property-decorator';
 import {Action, State} from 'vuex-class';
 import {Machine} from '@/types/Machine';
-import {ElForm} from 'element-ui/types/form';
 import MachineSettingsDialog from '@/components/machine_settings_dialog/MachineSettingsDialog';
+import MachineSettingsForm from '@/components/machine_settings_form/MachineSettingsForm';
 
 @Component({
-  components: {MachineSettingsDialog},
+  components: {MachineSettingsDialog, MachineSettingsForm},
 })
 export default class Devices extends Vue {
 
@@ -18,7 +18,7 @@ export default class Devices extends Vue {
   @Action
   private deleteMachine: (id: string) => Promise<void>;
 
-  private machineDeleteDialogVisible: boolean = false;
+  private machineAddDialogVisible: boolean = false;
   private machineSettingsDialogVisible: boolean = false;
   private selectedMachine: Machine = null;
   private machineToAdd: Machine = {
@@ -26,28 +26,20 @@ export default class Devices extends Vue {
     machineId: '',
     machineName: '',
   };
-  private rules = {
-    machineId: [
-      {required: true, message: 'Please provide a name', trigger: 'blur'},
-    ],
-    machineName: [
-      {required: true, message: 'Please provide an id', trigger: 'blur'},
-    ],
-  };
 
   created() {
     this.fetchMachines();
   }
 
   private async validateForm() {
-    await (this.$refs.addMachineForm as ElForm).validate();
+    await (this.$refs.addMachineForm as MachineSettingsForm).validate();
   }
 
   private async addMachine() {
     try {
       await this.validateForm();
       await this.createMachine(this.machineToAdd);
-      this.closeDeleteDialog();
+      this.closeAddDialog();
     } catch (e) {
     }
   }
@@ -80,12 +72,12 @@ export default class Devices extends Vue {
     }
   }
 
-  openDeleteDialog() {
-    this.machineDeleteDialogVisible = true;
+  openAddDialog() {
+    this.machineAddDialogVisible = true;
   }
 
-  closeDeleteDialog() {
-    this.machineDeleteDialogVisible = false;
+  closeAddDialog() {
+    this.machineAddDialogVisible = false;
   }
 
   @Watch('machineSettingsDialogVisible')

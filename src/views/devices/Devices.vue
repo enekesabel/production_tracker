@@ -6,7 +6,7 @@
             </h1>
             <el-button type="primary"
                        class="mt-3"
-                       @click="openDialog">Add device
+                       @click="openAddDialog">Add device
             </el-button>
         </div>
         <el-table
@@ -49,21 +49,12 @@
                                  :machine="selectedMachine"></machine-settings-dialog>
         <el-dialog
                 title="Add device"
-                :visible.sync="machineDeleteDialogVisible"
+                :visible.sync="machineAddDialogVisible"
                 width="30%">
-            <el-form :model="machineToAdd"
-                     ref="addMachineForm"
-                     :rules="rules"
-                     label-width="60px">
-                <el-form-item label="Name" prop="machineName">
-                    <el-input v-model="machineToAdd.machineName"></el-input>
-                </el-form-item>
-                <el-form-item label="Id" prop="machineId">
-                    <el-input v-model="machineToAdd.machineId"></el-input>
-                </el-form-item>
-            </el-form>
+            <machine-settings-form v-model="machineToAdd"
+                                   ref="addMachineForm"></machine-settings-form>
             <div slot="footer" class="dialog-footer">
-                <el-button @click="closeDeleteDialog">Cancel</el-button>
+                <el-button @click="closeAddDialog">Cancel</el-button>
                 <el-button type="primary" @click="addMachine">Add</el-button>
             </div>
         </el-dialog>
