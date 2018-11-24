@@ -14,7 +14,8 @@
         </el-menu-item>
         <el-submenu index="2" style="float: right;">
             <template slot="title">Profile</template>
-            <el-menu-item @click="requestAdminRights">Request admin rights
+            <el-menu-item @click="requestAdminRights"
+                          index="admin">Request admin rights
             </el-menu-item>
             <el-menu-item @click="logout"
                           :route="{name: Routes.LOGIN}"
