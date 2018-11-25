@@ -27,6 +27,13 @@
                 <template slot-scope="scope">
                     <div>
                         <el-button type="primary"
+                                   icon="el-icon-view"
+                                   title="View device page"
+                                   size="mini"
+                                   @click="goToDevicePage(scope.row.id)"
+                                   circle>
+                        </el-button>
+                        <el-button type="primary"
                                    icon="el-icon-setting"
                                    title="Configure"
                                    size="mini"

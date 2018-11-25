@@ -3,6 +3,7 @@ import {Action, State} from 'vuex-class';
 import {Machine} from '@/types/Machine';
 import MachineSettingsDialog from '@/components/machine_settings_dialog/MachineSettingsDialog';
 import MachineSettingsForm from '@/components/machine_settings_form/MachineSettingsForm';
+import {Routes} from '@/router/Routes';
 
 @Component({
   components: {MachineSettingsDialog, MachineSettingsForm},
@@ -78,6 +79,10 @@ export default class Devices extends Vue {
 
   closeAddDialog() {
     this.machineAddDialogVisible = false;
+  }
+
+  goToDevicePage(deviceId: string) {
+    this.$router.push({name: Routes.DEVICE_DETAILS, params: {deviceId}});
   }
 
   @Watch('machineSettingsDialogVisible')
