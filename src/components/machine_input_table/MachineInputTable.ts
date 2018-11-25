@@ -74,7 +74,6 @@ export default class MachineInputTable extends Vue {
     this.inputEditorMode = InputEditorMode.ADD;
     this.selectedInput = {
       gpioPin: null,
-      id: null,
       machineId: this.machineId,
       name: '',
       inputType: null,
