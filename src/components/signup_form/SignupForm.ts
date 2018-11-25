@@ -63,7 +63,7 @@ export default class SignupForm extends Vue {
           },
           autoLogin: true,
           rememberMe: true,
-          redirect: {name: 'gallery'},
+          redirect: {name: Routes.HOME},
         });
       } else {
         console.log('error submit!!');
