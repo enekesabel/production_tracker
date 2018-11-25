@@ -44,8 +44,20 @@ Vue.use(VueAuth, {
   },
 });
 
-new Vue({
+const main = new Vue({
   router,
   store,
   render: h => h(App),
 }).$mount('#app');
+
+Vue.axios.interceptors.response.use((response) => { // intercept the global error
+  return response;
+}, (error) => {
+  if (error.response.status === 403) { // if the error is 401 and hasent already been retried
+    setTimeout(() => {
+      main.$message.error('Operation forbidden. You may not have the necessary rights.');
+    },1);
+    // Do something with response error
+    return Promise.reject(error);
+  }
+});
