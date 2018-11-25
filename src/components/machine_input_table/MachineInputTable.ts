@@ -3,6 +3,7 @@ import {MachineInput} from '@/types/MachineInput';
 import MachineInputEditorDialog from '@/components/machine_input_editor/MachineInputEditorDialog';
 import {GPIOPin} from '@/enums/GPIOPin';
 import {MachineInputApi} from '@/api/MachineInputApi';
+import {InputType} from '@/enums/InputType';
 
 @Component({
   components: {MachineInputEditorDialog},
@@ -19,6 +20,14 @@ export default class MachineInputTable extends Vue {
   private oldInputs: MachineInput[] = [];
   private selectedInput: MachineInput = null;
   private inputEditorMode: InputEditorMode = InputEditorMode.ADD;
+
+  InputType = InputType;
+
+  get parsedInputs(): any[] {
+    return this.inputs.map((i) => {
+      return {...i, inputType: InputType[i.inputType]};
+    });
+  }
 
   get showAddButton(): boolean {
     return this.inputs.length < 16;
@@ -68,6 +77,7 @@ export default class MachineInputTable extends Vue {
       id: null,
       machineId: this.machineId,
       name: '',
+      inputType: null,
     };
 
     this.openMachineInputEditorDialog();

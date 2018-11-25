@@ -20,6 +20,16 @@
                     </el-option>
                 </el-select>
             </el-form-item>
+            <el-form-item label="Type" prop="inputType">
+                <el-select v-model="localInput.inputType" placeholder="Select">
+                    <el-option
+                            v-for="(value, key) in inputTypes"
+                            :key="key"
+                            :label="key"
+                            :value="value">
+                    </el-option>
+                </el-select>
+            </el-form-item>
         </el-form>
         <div slot="footer" class="dialog-footer">
             <el-button @click="cancel">Cancel</el-button>

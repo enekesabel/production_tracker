@@ -4,6 +4,7 @@ import {DialogMixin} from '@/mixins/DialogMixin';
 import {MachineInput} from '@/types/MachineInput';
 import {GPIOPin} from '@/enums/GPIOPin';
 import {Form} from 'element-ui';
+import {InputType} from '@/enums/InputType';
 
 @Component
 export default class MachineInputEditorDialog extends mixins(DialogMixin) {
@@ -35,7 +36,20 @@ export default class MachineInputEditorDialog extends mixins(DialogMixin) {
     gpioPin: [
       {required: true, message: 'Please select a pin', trigger: 'change'},
     ],
+    inputType: [
+      {required: true, message: 'Please select an input type', trigger: 'change'},
+    ],
   };
+
+  get inputTypes(): {[k in InputType]?: number} {
+    return Object.keys(InputType).reduce((p, c: string) => {
+      const value = InputType[c as any as number];
+      if (typeof value === 'number') {
+        return {...p, ...{[c]: value}};
+      }
+      return p;
+    }, {});
+  }
 
   async save() {
     const form = this.$refs.form as Form;

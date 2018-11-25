@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-table
-                :data="inputs"
+                :data="parsedInputs"
                 :default-sort="{prop: 'gpioPin'}"
                 style="width: 100%">
             <el-table-column
@@ -15,6 +15,10 @@
             <el-table-column
                     prop="machineId"
                     label="Machine ID">
+            </el-table-column>
+            <el-table-column
+                    prop="inputType"
+                    label="Type">
             </el-table-column>
             <el-table-column
                     align="center"
