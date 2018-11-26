@@ -1,5 +1,5 @@
 import Vue from 'vue';
-import Vuex, {ActionTree, MutationTree} from 'vuex';
+import Vuex, {ActionTree, GetterTree, MutationTree} from 'vuex';
 import {IRootState} from '@/store/IRootState';
 import {Machine} from '@/types/Machine';
 import {RootMutation} from '@/store/RootMutation';
@@ -12,6 +12,10 @@ Vue.use(Vuex);
 const state: IRootState = {
   machines: [],
   users: [],
+};
+
+const getters: GetterTree<IRootState, IRootState> = {
+  getMachineById: state => (machineId: string) => state.machines.find(m => m.id === machineId),
 };
 
 const actions: ActionTree<IRootState, IRootState> = {
@@ -66,6 +70,7 @@ const mutations: MutationTree<IRootState> = {
 
 export default new Vuex.Store<IRootState>({
   state,
-  mutations,
+  getters,
   actions,
+  mutations,
 });

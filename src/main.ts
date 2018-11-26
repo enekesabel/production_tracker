@@ -56,7 +56,7 @@ Vue.axios.interceptors.response.use((response) => { // intercept the global erro
   if (error.response.status === 403) { // if the error is 401 and hasent already been retried
     setTimeout(() => {
       main.$message.error('Operation forbidden. You may not have the necessary rights.');
-    },1);
+    }, 1);
     // Do something with response error
     return Promise.reject(error);
   }
