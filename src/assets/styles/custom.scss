@@ -1,0 +1,82 @@
+@import "element_vars";
+//
+// Color system
+//
+
+$white: #fff;
+$gray-100: $border-light;
+$gray-200: #dddddd;
+$gray-300: #cccccc;
+$gray-400: $text-placeholder;
+$gray-500: $text-secondary;
+$gray-600: $text-regular;
+$gray-700: $text-primary;
+$gray-800: #2d2d2d;
+$gray-900: #262626;
+$gray: $gray-400;
+
+$blue: $blue !default;
+$indigo: #6610f2 !default;
+$purple: #6f42c1 !default;
+$pink: #e83e8c !default;
+$red: $danger;
+$orange: $warning !default;
+$yellow: #EB9E05;
+$green: $success;
+$teal: #34f6ac !default;
+$cyan: #01bcd2 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  "blue": $blue,
+  "indigo": $indigo,
+  "purple": $purple,
+  "pink": $pink,
+  "red": $red,
+  "orange": $orange,
+  "yellow": $yellow,
+  "green": $green,
+  "teal": $teal,
+  "cyan": $cyan,
+  "white": $white,
+  "gray": $gray-400,
+), $colors);
+
+$primary: $blue;
+$dark: $gray-900;
+$info: $info !default;
+$success: $green !default;
+$warning: $orange !default;
+$danger: $red !default;
+$light: $gray-100 !default;
+
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  "primary": $primary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark,
+  "yellow": $yellow,
+), $theme-colors);
+
+// Options
+//
+// Quickly modify global styling by enabling or disabling optional features.
+
+$enable-rounded: false;
+$enable-shadows: false;
+
+// Body
+//
+// Settings for the `<body>` element.
+
+$body-bg: $white;
+$body-color: $gray-700;
+
+
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";

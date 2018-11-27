@@ -1,0 +1,27 @@
+<template>
+    <el-form id="signup" :model="signupForm" label-position="top" :rules="rules" ref="signupForm" label-width="120px">
+        <h4 class="text-center">Signup</h4>
+        <el-form-item label="Email" prop="email">
+            <el-input v-model="signupForm.email"></el-input>
+        </el-form-item>
+        <el-form-item label="Full name" prop="name">
+            <el-input v-model="signupForm.name"></el-input>
+        </el-form-item>
+        <el-form-item label="Password" prop="password">
+            <el-input v-model="signupForm.password" type="password" auto-complete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Confirm" prop="passwordConfirm">
+            <el-input type="password" v-model="signupForm.passwordConfirm" auto-complete="off"></el-input>
+        </el-form-item>
+        <div class="d-flex justify-content-between">
+            <router-link :to="{name: Routes.LOGIN}">Log in</router-link>
+            <el-form-item>
+                <el-button type="primary" @click="signup()">Sign up</el-button>
+            </el-form-item>
+        </div>
+    </el-form>
+
+</template>
+
+<script lang="ts" src="./SignupForm.ts">
+</script>
