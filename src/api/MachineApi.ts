@@ -3,6 +3,10 @@ import {Machine} from '@/types/Machine';
 
 // tslint:disable-next-line
 export const MachineApi = {
+  async getMachine(id:string): Promise<Machine> {
+    const response = await axios.get(`machines/${id}`);
+    return response.data;
+  },
   async getMachines(): Promise<Machine[]> {
     const response = await axios.get('machines');
     return response.data;

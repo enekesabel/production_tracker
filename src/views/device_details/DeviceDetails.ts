@@ -2,7 +2,7 @@ import {Component, Prop, Vue, Watch} from 'vue-property-decorator';
 import {Machine} from '@/types/Machine';
 import {MachineData} from '@/types/MachineData';
 import {MachineDataApi} from '@/api/MachineDataApi';
-import {Getter} from 'vuex-class';
+import {Action, Getter} from 'vuex-class';
 import {InputType} from '@/enums/InputType';
 import {InputData} from '@/types/InputData';
 import Diagram from '@/components/diagram/Diagram';
@@ -20,6 +20,8 @@ export default class DeviceDetails extends Vue {
 
   @Getter
   private getMachineById: (machineId: string) => Machine;
+  @Action
+  private fetchMachine: (machineId: string) => Promise<void>;
 
   private machineData: MachineData = null;
 
@@ -49,6 +51,9 @@ export default class DeviceDetails extends Vue {
 
   @Watch('deviceId', {immediate: true})
   async onDeviceIdChange(deviceId: string) {
+    if (!this.machine) {
+      this.fetchMachine(deviceId);
+    }
     this.machineData = await MachineDataApi.getDataOfMachine(deviceId);
   }
 }
